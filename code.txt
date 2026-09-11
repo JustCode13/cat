@@ -1,0 +1,34 @@
+int print_files_data(int file_count, int *file_fds) {
+    char *line = malloc(is_bufsize ? bufsize : 256);
+
+    if (line == NULL) {
+        printf("Error allocating memory\n");
+        return 1;
+    }
+
+    printf("%d\n", file_count);
+
+    for (int i = 0; i < file_count; i++) {
+
+        ssize_t bytes_read;
+
+        printf("H\n");
+
+        while ((bytes_read = read(file_fds[i], line, bufsize - 1)) > 0) {
+            printf("k\n");
+
+            printf("%zd\n", bytes_read);
+
+            if (bytes_read > 0) {
+
+                line[bytes_read] = '\0';
+                write(STDOUT_FILENO, line, (size_t)bytes_read);
+            }
+        }
+
+        close(file_fds[i]);
+    }
+
+    return 0;
+}
+

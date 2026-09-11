@@ -1,0 +1,3 @@
+hello
+this is just me using
+cat with output redirection
